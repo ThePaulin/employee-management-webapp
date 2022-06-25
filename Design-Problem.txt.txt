@@ -1,0 +1,21 @@
+
+	Design Problem: Jumpstart 
+
+Jumpstart needs a system for managing employees. The system gives the manager administrative privilegdes 
+that include viewing all employees, adding new employees and de-activating employee, viewing all employees
+time tables, modifying time tables, chatting with employees through the system 
+and plan shifts two weeks ahead of the current week.
+
+The administration needs the first name, the last name, the date of birth, the e-mail, the phone number, and a start-date
+to register a new employee. The system generates a username and a password for the employee which they will
+be asked to change the first time they login. The system generated username and password are also sent to the 
+employee's e-mail.
+
+The shifts are in chunks of 8hours. First shift is from 7AM to 3PM, the second shift is from 3PM to 11PM 
+and the third shift is from 11PM to 7AM.The time table includes the workstation for each shift. Workstations are 
+whole numbers from 1 to 20. Only one employee can be at a workstation during the same shift. Vacant shifts are
+red, filled shifts are green, and the admin can choose to mark a shift as pending when they have made a shift 
+change and are waiting for the employee to confirm via chat.
+
+Employees can view their respective time timebles. To modify them they need to chat with the administrator.
+
