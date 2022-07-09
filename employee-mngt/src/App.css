@@ -23,6 +23,7 @@
   
   padding: 0;
   min-height: 100vh;
+  transition: all ease-in-out;
   
 }
 
@@ -41,9 +42,27 @@
   text-align: center;
   width: 100%;
   padding: 50px;
- 
+}
+/* .footer .footerText:hover{
+  animation-name: colorHighlight;
+  animation-iteration-count: 3;
+  animation-duration: 100ms;
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  
+} */
 
+.whileInView{
+  animation-name: colorHighlight;
+  animation-iteration-count: infinite;
+  animation-duration:4000ms;
+  /* transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); */
+  transition: all ease;
+}
 
+@keyframes colorHighlight {
+  from{color: var(--accent-color);}
+  to{color: var(--message-color);}
+  
 }
 
 /* Login*/
@@ -54,10 +73,12 @@
 .login-container{
   flex-direction: column;
   padding: 2rem 3rem;
-  margin: 4rem auto ;
-  background-color: var(--light-grey-color) ;
+  margin: 10% auto ;
+  background-color: var(--lighter-grey-color) ;
+  box-shadow: rgba(0, 0, 0, 0.452) 2rem 2rem 2rem;
   width: 20em ;
-  height: 30em;
+  min-height: 30em;
+  height: fit-content;
   /* border:2px solid rgb(255, 0, 0); */
   
 
@@ -66,8 +87,9 @@
 }
 .logo-login{
   width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  min-height: 100px;
+  border-radius: 100%;
+  padding: 1rem;
  
   margin: auto;
 
@@ -110,6 +132,7 @@
   color: var(--white-color);
 }
 
+
 .admin-div{
   flex-direction: row;
   width: 200px;
@@ -151,6 +174,19 @@
   font-size: 1rem;
   border-style: hidden;
   border-radius: 4px;
+}
+
+/*login form error styles*/
+.formFieldError {
+  border: 1px solid #e11d48;
+  
+}
+
+.formFieldErrorMessage {
+  color: #e11d48;
+  
+  
+ 
 }
 
 /*account page*/
