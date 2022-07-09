@@ -1,0 +1,55 @@
+{
+    "employees":[
+        {
+            "username": "KP02an",
+            "password": "pass",
+            "birthday": "02/02/1999",
+            "email": "paulin@gmail.ca",
+            "schedule": [
+                {
+                    "day": "Wednesday",
+                    "date": "7/8/2022",
+                    "workstation": 5,
+                    "shiftStart": "8:00 AM",
+                    "shiftEnd": "4:00 PM"
+                },
+                {
+                    "day": "Thursday",
+                    "date": " 7/9/2022",
+                    "workstation": 5,
+                    "shiftStart": "00:00 AM",
+                    "shiftEnd": "8:00 AM"
+                }
+            ]
+        },
+        {
+            "username": "HC07ee",
+            "password": "pass",
+            "birthday": "22/07/1995",
+            "email": "captone@gmail.ca",
+            "schedule": [
+                {
+                    "day": "Wednesday",
+                    "date": "7/8/2022",
+                    "workstation": 5,
+                    "shiftStart": "4:00 PM",
+                    "shiftEnd": "00:00 AM"
+                },
+                {
+                    "day": "Thursday",
+                    "date": "7/9/2022",
+                    "workstation": 5,
+                    "shiftStart": "00:00 AM",
+                    "shiftEnd": "8:00 AM"
+                },
+                {
+                    "day": "Friday",
+                    "date": "7/10/2022",
+                    "workstation": 2,
+                    "shiftStart": "00:00 PM",
+                    "shiftEnd": "8:00 AM"
+                }
+            ]
+        }
+    ]
+}
