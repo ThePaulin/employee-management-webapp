@@ -27,5 +27,5 @@ This project follows the following clean architecture principles:
 
 
 ### System
-![alt text](https://github.com/ThePaulin/employee-management-webapp/blob/system-design/45477.jpg?raw=true)
-![alt text](https://github.com/ThePaulin/employee-management-webapp/blob/system-design/31676.jpg?raw=true)
+![alt text](https://github.com/ThePaulin/employee-management-webapp/blob/main/45477.jpg?raw=true)
+![alt text](https://github.com/ThePaulin/employee-management-webapp/blob/main/31676.jpg?raw=true)
