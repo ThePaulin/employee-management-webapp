@@ -11,8 +11,18 @@ const ScheduleMaxDays = 14
 type Schedules []Schedule
 
 type Schedule struct {
-	ID       primitive.ObjectID `json:"id" bson:"_id,omitempty"`
-	Employee Employee           `json:"employee" bson:"employee,omitempty"`
-	Shift    Shift              `json:"shift" bson:"shift,omitempty"`
-	Date     time.Time          `json:"date" bson:"date,omitempty"`
+	ID         primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	EmployeeID primitive.ObjectID `json:"employeeId" bson:"employee,omitempty"`
+	ShiftID    primitive.ObjectID `json:"shiftId" bson:"shift,omitempty"`
+	Date       time.Time          `json:"date" bson:"date,omitempty"`
+}
+
+type ScheduleInfo struct {
+	ID   primitive.ObjectID `json:"id" bson:"id"`
+	Name string             `json:"name" bson:"name"`
+}
+
+type ScheduleShiftInfo struct {
+	ID   primitive.ObjectID `json:"id" bson:"id"`
+	Code string             `json:"code" bson:"code"`
 }
