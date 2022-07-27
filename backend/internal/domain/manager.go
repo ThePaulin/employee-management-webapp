@@ -13,5 +13,6 @@ type Manager struct {
 	Lastname     string               `json:"lastname" bson:"lastname,omitempty"`
 	Email        string               `json:"email" bson:"email"`
 	Password     string               `json:"password" bson:"password"`
+	Session      Session              `json:"session" bson:"session,omitempty"`
 	Workstations []primitive.ObjectID `json:"workstations" bson:"workstations"`
 }

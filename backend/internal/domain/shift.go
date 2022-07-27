@@ -6,6 +6,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+const ShiftBookingMaxDays = 14
+
 type Shifts []Shift
 
 type Shift struct {

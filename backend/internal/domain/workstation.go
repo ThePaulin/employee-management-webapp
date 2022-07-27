@@ -6,6 +6,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+const WorkstationBookingMaxDays = 14
+
 type Workstations []Workstation
 
 type Workstation struct {
