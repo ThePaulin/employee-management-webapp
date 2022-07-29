@@ -5,6 +5,7 @@ import "errors"
 var (
 	ErrManagerNotFound          = errors.New("manager doesn't exist")
 	ErrManagerAlreadyExists     = errors.New("manager with such email or phone number already exists")
+	ErrWorkstationAlreadyExists = errors.New("workstation with such name or code already exists")
 	ErrScheduleNotFound         = errors.New("schedule doesn't exist")
 	ErrShiftNotFound            = errors.New("shift doesn't exist")
 	ErrWorkstationNotFound      = errors.New("workstation doesn't exist")

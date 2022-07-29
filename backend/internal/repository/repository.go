@@ -12,7 +12,7 @@ import (
 )
 
 type Managers interface {
-	Create(ctx context.Context, manager domain.Manager) error
+	Create(ctx context.Context, manager *domain.Manager) error
 	GetByCredentials(ctx context.Context, email string, password string) (domain.Manager, error)
 	GetByRefreshToken(ctx context.Context, refreshToken string) (domain.Manager, error)
 	SetSession(ctx context.Context, managerID primitive.ObjectID, session domain.Session) error
@@ -29,11 +29,11 @@ type UpdateWorkstationInput struct {
 }
 
 type Workstations interface {
-	Create(ctx context.Context, name string) (primitive.ObjectID, error)
+	Create(ctx context.Context, code int, name string) (primitive.ObjectID, error)
 	GetById(ctx context.Context, workstationID primitive.ObjectID) (domain.Workstation, error)
 	GetByManager(ctx context.Context, managerID primitive.ObjectID) (domain.Workstations, error)
 	GetByShift(ctx context.Context, shiftID primitive.ObjectID) (domain.Workstation, error)
-	Update(ctx context.Context, input UpdateWorkstationInput) error
+	Update(ctx context.Context, workstationID primitive.ObjectID, input UpdateWorkstationInput) error
 }
 
 type Employees interface {
@@ -43,10 +43,10 @@ type Employees interface {
 	GetByCredentials(ctx context.Context, username string, password string) (domain.Employee, error)
 	GetByRefreshToken(ctx context.Context, refreshToken string) (domain.Employee, error)
 	GetById(ctx context.Context, employeeID primitive.ObjectID) (domain.Employee, error)
-	GetByWorkstation(ctx context.Context, workstationID primitive.ObjectID) (domain.Employees, int64, error)
+	GetByWorkstation(ctx context.Context, workstationID primitive.ObjectID, query domain.GetEmployeesQuery) (domain.Employees, int64, error)
 	SetSession(ctx context.Context, employeeID primitive.ObjectID, session domain.Session) error
-	AttachSchedule(ctx context.Context, employeeID primitive.ObjectID, scheduleID primitive.ObjectID, workstationID primitive.ObjectID) error
-	DetachSchedule(ctx context.Context, employeeID primitive.ObjectID, scheduleID primitive.ObjectID, workstationID primitive.ObjectID) error
+	AttachSchedule(ctx context.Context, employeeID primitive.ObjectID, scheduleID primitive.ObjectID, shiftID primitive.ObjectID, workstationID primitive.ObjectID) error
+	DetachSchedule(ctx context.Context, employeeID primitive.ObjectID, scheduleID primitive.ObjectID, shiftID primitive.ObjectID, workstationID primitive.ObjectID) error
 }
 
 type UpdateShiftInput struct {
@@ -66,14 +66,14 @@ type Shifts interface {
 }
 
 type UpdateScheduleInput struct {
-	ScheduleID primitive.ObjectID
-	EmployeeID primitive.ObjectID
-	ShiftID    primitive.ObjectID
+	WorkstationID primitive.ObjectID
+	EmployeeID    primitive.ObjectID
+	ShiftID       primitive.ObjectID
 }
 
 type Schedules interface {
 	Create(ctx context.Context, schedule domain.Schedule) (primitive.ObjectID, error)
-	Update(ctx context.Context, input UpdateScheduleInput) error
+	Update(ctx context.Context, scheduleID primitive.ObjectID, input UpdateScheduleInput) error
 	Delete(ctx context.Context, employeeID primitive.ObjectID, scheduleID primitive.ObjectID) error
 	GetByEmployee(ctx context.Context, employeeID primitive.ObjectID) (domain.Schedules, error)
 	GetById(ctx context.Context, scheduleID primitive.ObjectID) (domain.Schedule, error)
@@ -91,11 +91,11 @@ type Repositories struct {
 
 func NewRepositories(db *mongo.Database) *Repositories {
 	return &Repositories{
-		Managers:     NewManagersRepo(),
-		Workstations: NewWorkstationsRepo(),
+		Managers:     NewManagersRepo(db),
+		Workstations: NewWorkstationsRepo(db),
 		Employees:    NewEmployeesRepo(db),
-		Shifts:       NewShiftsRepo(),
-		Schedules:    NewSchedulesRepo(),
+		// Shifts:       NewShiftsRepo(db),
+		// Schedules:    NewSchedulesRepo(db),
 	}
 }
 
