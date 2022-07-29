@@ -48,7 +48,7 @@ func (r *WorkstationsRepo) GetById(ctx context.Context, workstationID primitive.
 func (r *WorkstationsRepo) GetByManager(ctx context.Context, managerID primitive.ObjectID) (domain.Workstations, error) {
 	var workstations domain.Workstations
 
-	cur, err := r.db.Find(ctx, bson.M{"Managers": managerID})
+	cur, err := r.db.Find(ctx, bson.M{"managers": managerID})
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ func (r *WorkstationsRepo) GetByManager(ctx context.Context, managerID primitive
 func (r *WorkstationsRepo) GetByShift(ctx context.Context, shiftID primitive.ObjectID) (domain.Workstation, error) {
 	var workstation domain.Workstation
 
-	cur, err := r.db.Find(ctx, bson.M{"BiweeklyShifts": shiftID})
+	cur, err := r.db.Find(ctx, bson.M{"biweeklyShifts": shiftID})
 	if err != nil {
 		return domain.Workstation{}, err
 	}

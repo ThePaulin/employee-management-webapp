@@ -38,7 +38,7 @@ type Workstations interface {
 
 type Employees interface {
 	Create(ctx context.Context, employee *domain.Employee) error
-	Update(ctx context.Context, employee domain.UpdateEmployeeInput) error
+	Update(ctx context.Context, input domain.UpdateEmployeeInput) error
 	Delete(ctx context.Context, employeeID primitive.ObjectID) error
 	GetByCredentials(ctx context.Context, username string, password string) (domain.Employee, error)
 	GetByRefreshToken(ctx context.Context, refreshToken string) (domain.Employee, error)
@@ -58,10 +58,10 @@ type UpdateShiftInput struct {
 
 type Shifts interface {
 	Create(ctx context.Context, shift domain.Shift) (primitive.ObjectID, error)
-	Update(ctx context.Context, input UpdateShiftInput) error
+	Update(ctx context.Context, shiftID primitive.ObjectID, input UpdateShiftInput) error
 	Delete(ctx context.Context, shiftID primitive.ObjectID) error
 	GetById(ctx context.Context, shiftID primitive.ObjectID) (domain.Shift, error)
-	GetByStatus(ctx context.Context, shiftID primitive.ObjectID) (domain.Shifts, error)
+	GetByStatus(ctx context.Context, shiftID primitive.ObjectID, status string) (domain.Shifts, error)
 	SetStatus(ctx context.Context, shiftID primitive.ObjectID, status string) error
 }
 

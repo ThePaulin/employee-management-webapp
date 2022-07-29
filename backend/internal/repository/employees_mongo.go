@@ -33,37 +33,37 @@ func (r *EmployeesRepo) Create(ctx context.Context, employee *domain.Employee) e
 	return nil
 }
 
-func (r *EmployeesRepo) Update(ctx context.Context, employee domain.UpdateEmployeeInput) error {
+func (r *EmployeesRepo) Update(ctx context.Context, input domain.UpdateEmployeeInput) error {
 	updateQuery := bson.M{}
 
-	if employee.Firstame != "" {
-		updateQuery["firstname"] = employee.Firstame
+	if input.Firstame != "" {
+		updateQuery["firstname"] = input.Firstame
 	}
 
-	if employee.Lastname != "" {
-		updateQuery["lastname"] = employee.Lastname
+	if input.Lastname != "" {
+		updateQuery["lastname"] = input.Lastname
 	}
 
-	if employee.Active != nil {
-		updateQuery["active"] = *employee.Active
+	if input.Active != nil {
+		updateQuery["active"] = *input.Active
 	}
 
-	if employee.Status != nil {
-		updateQuery["status"] = *employee.Status
+	if input.Status != nil {
+		updateQuery["status"] = *input.Status
 	}
 
-	if employee.Address != nil {
+	if input.Address != nil {
 		updateQuery["address"] = domain.Address{
-			Country:       employee.Address.Country,
-			Province:      employee.Address.Province,
-			City:          employee.Address.City,
-			StreetAddress: employee.Address.StreetAddress,
-			PostalCode:    employee.Address.PostalCode,
+			Country:       input.Address.Country,
+			Province:      input.Address.Province,
+			City:          input.Address.City,
+			StreetAddress: input.Address.StreetAddress,
+			PostalCode:    input.Address.PostalCode,
 		}
 	}
 
 	_, err := r.db.UpdateOne(ctx,
-		bson.M{"_id": employee.EmployeeID},
+		bson.M{"_id": input.EmployeeID},
 		bson.M{"$set": updateQuery},
 	)
 
@@ -124,10 +124,10 @@ func (r *EmployeesRepo) GetById(ctx context.Context, employeeID primitive.Object
 
 func (r *EmployeesRepo) GetByWorkstation(ctx context.Context, workstationID primitive.ObjectID, query domain.GetEmployeesQuery) (domain.Employees, int64, error) {
 	paginationOpts := getPaginationOpts(&query.PaginationQuery)
-	paginationOpts.SetSort(bson.M{"Date": -1})
+	paginationOpts.SetSort(bson.M{"date": -1})
 	var employees domain.Employees
 
-	cur, err := r.db.Find(ctx, bson.M{"BiweeklyWorkstations": workstationID}, paginationOpts)
+	cur, err := r.db.Find(ctx, bson.M{"biweeklyWorkstations": workstationID}, paginationOpts)
 	if err != nil {
 		return nil, 0, err
 	}
@@ -137,7 +137,7 @@ func (r *EmployeesRepo) GetByWorkstation(ctx context.Context, workstationID prim
 		return nil, 0, err
 	}
 
-	count, err := r.db.CountDocuments(ctx, bson.M{"BiweeklyWorkstations": workstationID})
+	count, err := r.db.CountDocuments(ctx, bson.M{"biweeklyWorkstations": workstationID})
 
 	return employees, count, err
 }
@@ -150,9 +150,9 @@ func (r *EmployeesRepo) SetSession(ctx context.Context, employeeID primitive.Obj
 
 func (r *EmployeesRepo) AttachSchedule(ctx context.Context, employeeID primitive.ObjectID, scheduleID primitive.ObjectID, shiftID primitive.ObjectID, workstationID primitive.ObjectID) error {
 	_, err := r.db.UpdateOne(ctx, bson.M{"_id": employeeID}, bson.M{"$addToSet": bson.M{
-		"BiweeklyShifts":       shiftID,
-		"BiweeklyWorkstations": workstationID,
-		"BiweeklySchedules":    scheduleID,
+		"biweeklyShifts":       shiftID,
+		"biweeklyWorkstations": workstationID,
+		"biweeklySchedules":    scheduleID,
 	}})
 
 	return err
@@ -160,9 +160,9 @@ func (r *EmployeesRepo) AttachSchedule(ctx context.Context, employeeID primitive
 
 func (r *EmployeesRepo) DetachSchedule(ctx context.Context, employeeID primitive.ObjectID, scheduleID primitive.ObjectID, shiftID primitive.ObjectID, workstationID primitive.ObjectID) error {
 	_, err := r.db.UpdateOne(ctx, bson.M{"_id": employeeID}, bson.M{"$pull": bson.M{
-		"BiweeklyShifts":       shiftID,
-		"BiweeklyWorkstations": workstationID,
-		"BiweeklySchedules":    scheduleID,
+		"biweeklyShifts":       shiftID,
+		"biweeklyWorkstations": workstationID,
+		"biweeklySchedules":    scheduleID,
 	}})
 
 	return err

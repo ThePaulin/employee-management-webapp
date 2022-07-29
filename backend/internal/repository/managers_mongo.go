@@ -73,7 +73,7 @@ func (r *ManagersRepo) SetSession(ctx context.Context, managerID primitive.Objec
 
 func (r *ManagersRepo) AttachWorkstation(ctx context.Context, managerID primitive.ObjectID, workstationID primitive.ObjectID) error {
 	_, err := r.db.UpdateOne(ctx, bson.M{"_id": managerID}, bson.M{"$addToSet": bson.M{
-		"Workstations": workstationID,
+		"workstations": workstationID,
 	}})
 
 	return err

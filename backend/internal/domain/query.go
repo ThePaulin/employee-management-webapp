@@ -44,6 +44,11 @@ type GetWorkstationsQuery struct {
 	ShiftsFiltersQuery
 }
 
+type GetShiftsQuery struct {
+	PaginationQuery
+	ShiftsFiltersQuery
+}
+
 func (p PaginationQuery) GetSkip() *int64 {
 	if p.Skip == 0 {
 		return nil
