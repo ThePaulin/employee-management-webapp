@@ -61,21 +61,19 @@ type Shifts interface {
 	Update(ctx context.Context, shiftID primitive.ObjectID, input UpdateShiftInput) error
 	Delete(ctx context.Context, shiftID primitive.ObjectID) error
 	GetById(ctx context.Context, shiftID primitive.ObjectID) (domain.Shift, error)
-	GetByStatus(ctx context.Context, shiftID primitive.ObjectID, status string) (domain.Shifts, error)
+	GetByStatus(ctx context.Context, shiftID primitive.ObjectID, status string, query domain.GetShiftsQuery) (domain.Shifts, int64, error)
 	SetStatus(ctx context.Context, shiftID primitive.ObjectID, status string) error
 }
 
 type UpdateScheduleInput struct {
-	WorkstationID primitive.ObjectID
-	EmployeeID    primitive.ObjectID
-	ShiftID       primitive.ObjectID
+	EmployeeID primitive.ObjectID
 }
 
 type Schedules interface {
 	Create(ctx context.Context, schedule domain.Schedule) (primitive.ObjectID, error)
-	Update(ctx context.Context, scheduleID primitive.ObjectID, input UpdateScheduleInput) error
-	Delete(ctx context.Context, employeeID primitive.ObjectID, scheduleID primitive.ObjectID) error
-	GetByEmployee(ctx context.Context, employeeID primitive.ObjectID) (domain.Schedules, error)
+	Update(ctx context.Context, scheduleID primitive.ObjectID, employeeID primitive.ObjectID) error
+	Delete(ctx context.Context, scheduleID primitive.ObjectID) error
+	GetByEmployee(ctx context.Context, employeeID primitive.ObjectID, query domain.GetSchedulesQuery) (domain.Schedules, int64, error)
 	GetById(ctx context.Context, scheduleID primitive.ObjectID) (domain.Schedule, error)
 	GetByShift(ctx context.Context, shiftID primitive.ObjectID) (domain.Schedule, error)
 	GetByIds(ctx context.Context, scheduleIDs []primitive.ObjectID) (domain.Schedules, error)
@@ -94,8 +92,8 @@ func NewRepositories(db *mongo.Database) *Repositories {
 		Managers:     NewManagersRepo(db),
 		Workstations: NewWorkstationsRepo(db),
 		Employees:    NewEmployeesRepo(db),
-		// Shifts:       NewShiftsRepo(db),
-		// Schedules:    NewSchedulesRepo(db),
+		Shifts:       NewShiftsRepo(db),
+		Schedules:    NewSchedulesRepo(db),
 	}
 }
 

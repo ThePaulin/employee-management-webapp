@@ -28,7 +28,7 @@ type ShiftsFiltersQuery struct {
 	Status   string `form:"status"`
 }
 
-type GetOrdersQuery struct {
+type GetSchedulesQuery struct {
 	PaginationQuery
 	SearchQuery
 	ShiftsFiltersQuery
