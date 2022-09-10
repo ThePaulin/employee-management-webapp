@@ -1,0 +1,36 @@
+http:
+  port: 8000
+  maxHeaderBytes: 1
+  readTimeout: 10s
+  writeTimeout: 10s
+
+cache:
+  ttl: 60s
+
+mongo:
+  databaseName: companyPlatform
+
+fileStorage:
+  url: aws.example.com
+  bucket: company
+
+auth:
+  accessTokenTTL: 2h
+  refreshTokenTTL: 720h
+  verificationCodeLength: 8
+
+limiter:
+  rps: 10
+  burst: 20
+  ttl: 10m
+
+smtp:
+  host: "mail.privateemail.com"
+  port: 587
+  from: "hcaptone.dev@gmail.com"
+
+email:
+  templates:
+    verification_email: "./templates/verification_email.html"
+  subjects:
+    verification_email: "Thanks for signing up, %s! "
