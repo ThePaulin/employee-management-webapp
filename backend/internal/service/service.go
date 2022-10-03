@@ -73,20 +73,20 @@ type Employees interface {
 
 // Schedules
 type CreateScheduleInput struct {
-	EmployeeID primitive.ObjectID
-	ShiftID primitive.ObjectID
+	EmployeeID    primitive.ObjectID
+	ShiftID       primitive.ObjectID
 	WorkstationID primitive.ObjectID
-	Date time.Time
+	Date          time.Time
 }
 
 type UpdateScheduleInput struct {
-	ID string
-	EmployeeID string
-	ShiftID string
+	ID            string
+	EmployeeID    string
+	ShiftID       string
 	WorkstationID string
 }
 
-type Schedules struct {
+type Schedules interface {
 	Create(ctx context.Context, schedule CreateScheduleInput) (primitive.ObjectID, error)
 	Update(ctx context.Context, scheduleID primitive.ObjectID, employeeID primitive.ObjectID) error
 	Delete(ctx context.Context, scheduleID primitive.ObjectID) error
