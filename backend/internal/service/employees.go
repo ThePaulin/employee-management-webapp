@@ -5,6 +5,7 @@ import (
 	"employee-management-webapp/pkg/auth"
 	"employee-management-webapp/pkg/hash"
 	"employee-management-webapp/pkg/otp"
+	"time"
 )
 
 type EmployeesService struct {
@@ -13,5 +14,9 @@ type EmployeesService struct {
 	tokenCfg auth.TokenConfig
 	otpCfg   otp.Config
 
-	// shiftsService Shi
+	// shiftsService Shift
+
+	accessTokenTTL         time.Duration
+	refreshTokenTTL        time.Duration
+	verificationCodeLength int
 }
